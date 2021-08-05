@@ -7,6 +7,7 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from rich.console import Console
 from rest_framework import serializers
+# from tasks import predict
 
 '''endpoint calls are directed to specific functions/classes in the views of our app'''
 

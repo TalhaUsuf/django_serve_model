@@ -3,6 +3,10 @@ from torchsummary import summary
 import torch
 from PIL import Image
 import numpy as np
+import os
+
+# MODEL_PATH = os.environ["MODEL_PATH"]
+
 
 class extract_features:
     def __init__(self, resize : int = 256, imagesize : int = 224):
