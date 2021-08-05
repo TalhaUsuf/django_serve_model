@@ -24,7 +24,7 @@ Run the celery worker app to listen for the tasks. (run in cmd)
 
 Following command will run the fastapi server.
 
-> `python send_request.py`
+> ` uvicorn send_request:app --reload`
 
 
 # Test API
