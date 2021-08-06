@@ -125,3 +125,16 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#                      celery configuration options
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+# Celery Configuration Options
+# rabbit mq as broker
+CELERY_BROKER_URL = 'pyamqp://'
+# redis as the results backend
+CELERY_RESULT_BACKEND = 'redis://localhost'
+
+
