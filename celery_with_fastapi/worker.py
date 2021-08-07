@@ -18,3 +18,6 @@ app = Celery(
     include=['tasks']
 )
 
+# delete previously stuck tasks in the queue.
+# if this command is not used, celery workers will resume tasks stuck in the queue even if computer restarts
+app.control.purge()

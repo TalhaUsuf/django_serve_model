@@ -3,12 +3,17 @@
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 import importlib
 import logging
-from celery import Task
+from celery import Task, shared_task
 import sys, os
 sys.path.append(os.pardir)
 from app.detector.detection_model.resnet_feature_extractor import extract_features
 from worker import app
 
+
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#                      SEE this to see how to define classes
+# https://docs.celeryproject.org/en/stable/userguide/tasks.html?highlight=Task#custom-task-classes
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 class PredictTask(Task):
     """
     Abstraction of Celery's Task class to support loading ML model.
@@ -31,8 +36,8 @@ class PredictTask(Task):
         return self.run(*args, **kwargs)
 
 
-
-@app.task(ignore_result=False,
+# @app.task
+@shared_task(ignore_result=False,
           bind=True,
           base=PredictTask,
           path=('/home/talha/PycharmProjects/django_backend_api/app/detector/detection_model/resnet_feature_extractor', 'features_extract'),
@@ -45,5 +50,5 @@ def give_features(self, data):
     print([i for i in data])
     # out = [self.model.predict(i).cpu().squeeze().list() for i in data]
     out = [self.model.predict(i) for i in data]
-
+    del self.model
     return out

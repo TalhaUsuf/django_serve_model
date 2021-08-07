@@ -20,7 +20,7 @@ it tells the status of the API.
 
 Run the celery worker app to listen for the tasks. (run in cmd)
 
-> `celery -A worker  worker -E -l info`
+> `celery -A worker worker -l INFO  --max-memory-per-child 10000 --concurrency 6`
 
 Following command will run the fastapi server.
 
@@ -75,6 +75,13 @@ POSTMAN can be used to test the API, instructions are following:
 
 > **If task is still in process, then it will send the status in response**
 
+
+## Using python script
+
+[sendMultiReq](./sendMultiReq.py) is a simple script to send 10 requests at once with 40 images per request, while the
+model predicts using batch size of 1. Use following command to send the requests.
+
+> `python sendMultiReq.py`
 
 # Important Note
  - HELP has been taken from [this](https://towardsdatascience.com/deploying-ml-models-in-production-with-fastapi-and-celery-7063e539a5db) article
