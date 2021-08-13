@@ -1,0 +1,55 @@
+from django.db import models
+
+
+# create table on database to store the predictions
+# if this is not created, then nothing will be saved in the database.
+
+class inference(models.Model):
+    task_id = models.CharField(max_length=200, default='')
+    service = models.TextField(max_length=100, default='')
+    state = models.TextField(max_length=100, default='')
+    proto = models.TextField(max_length=100, default='')
+    attack_cat = models.TextField(max_length=100, default='')
+    ID_NO = models.FloatField(default=100)
+    dur = models.FloatField(default=100)
+    spkts = models.FloatField(default=100)
+    dpkts = models.FloatField(default=100)
+    sbytes = models.FloatField(default=100)
+    dbytes = models.FloatField(default=100)
+    rate = models.FloatField(default=100)
+    sttl = models.FloatField(default=100)
+    dttl = models.FloatField(default=100)
+    sload = models.FloatField(default=100)
+    dload = models.FloatField(default=100)
+    sloss = models.FloatField(default=100)
+    dloss = models.FloatField(default=100)
+    sinpkt = models.FloatField(default=100)
+    dinpkt = models.FloatField(default=100)
+    sjit = models.FloatField(default=100)
+    djit = models.FloatField(default=100)
+    swin = models.FloatField(default=100)
+    stcpb = models.FloatField(default=100)
+    dtcpb = models.FloatField(default=100)
+    dwin = models.FloatField(default=100)
+    tcprtt = models.FloatField(default=100)
+    synack = models.FloatField(default=100)
+    ackdat = models.FloatField(default=100)
+    smean = models.FloatField(default=100)
+    dmean = models.FloatField(default=100)
+    trans_depth = models.FloatField(default=100)
+    response_body_len = models.FloatField(default=100)
+    ct_srv_src = models.FloatField(default=100)
+    ct_state_ttl = models.FloatField(default=100)
+    ct_dst_ltm = models.FloatField(default=100)
+    ct_src_dport_ltm = models.FloatField(default=100)
+    ct_dst_sport_ltm = models.FloatField(default=100)
+    ct_dst_src_ltm = models.FloatField(default=100)
+    is_ftp_login = models.FloatField(default=100)
+    ct_ftp_cmd = models.FloatField(default=100)
+    ct_flw_http_mthd = models.FloatField(default=100)
+    ct_src_ltm = models.FloatField(default=100)
+    ct_srv_dst = models.FloatField(default=100)
+    is_sm_ips_ports = models.FloatField(default=100)
+
+    def __str__(self):
+        return f"----> {self.attack_cat}"

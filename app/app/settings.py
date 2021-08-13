@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -38,8 +38,23 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'detector'
+    # 'keras_inference',
+    'drf_yasg',
+    'keras_updated'
 ]
+
+
+# configure celery and redis
+# CELERY_BROKER_URL = 'redis://localhost:6379'
+# CELERY_RESULT_BACKEND = 'redis://'
+# Celery Configuration Options
+# rabbit mq as broker
+CELERY_BROKER_URL = 'pyamqp://'
+# redis as the results backend
+CELERY_RESULT_BACKEND = 'redis://localhost'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -131,10 +146,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #                      celery configuration options
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-# Celery Configuration Options
-# rabbit mq as broker
-CELERY_BROKER_URL = 'pyamqp://'
-# redis as the results backend
-CELERY_RESULT_BACKEND = 'redis://localhost'
 
 
+
+
+MODELS = os.path.join(BASE_DIR, 'keras_inference/weights.02-0.99998.hdf5')
+PREPROCESSOR = os.path.join(BASE_DIR, 'keras_inference/preprocess.pkl')
