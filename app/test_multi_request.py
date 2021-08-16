@@ -1,7 +1,7 @@
 import requests
 
 
-for k in range(200):
+for k in range(100):
     requests.post('http://127.0.0.1:8000/api/predict/' , data= {
 "service":"-",
 "state":"NEW",
