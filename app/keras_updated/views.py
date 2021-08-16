@@ -11,6 +11,10 @@ from rest_framework import status
 from .tasks import perform_prediciton
 import io
 from rest_framework.parsers import JSONParser
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.decorators import api_view
+
 
 
 class predict_view(APIView):
@@ -60,6 +64,22 @@ class predict_view(APIView):
 
                 return Response({"db_obj_id" : db_id, "task_id" : task_id, "status": "Completed", "result" : output})
 
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+#           for checking heart beat
+# %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+# class check_heartbeat(viewsets.GenericViewSet):
+#
+#     @action(methods=['GET'], detail=True)
+#     def heartbeat(self, request):
+#         return Response({"alive":"OK"}, status=status.HTTP_200_OK)
+    
+@api_view(["GET"])
+def check_heartbeat(request):
+    if request.method=='GET':
+        return Response({"heartbeat" : "OK"}, status=status.HTTP_200_OK)
+    else:
+        return Response({"status" : "this is a get method"}, status=status.HTTP_400_BAD_REQUEST)
 
 # %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #          for accessing the database stored items
